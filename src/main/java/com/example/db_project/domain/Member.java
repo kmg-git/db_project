@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "members")
 public class Member {
@@ -29,6 +31,8 @@ public class Member {
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createAt=LocalDateTime.now();;
+
+
 
 
 

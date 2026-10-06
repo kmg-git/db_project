@@ -3,7 +3,9 @@ package com.example.db_project.domain;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "payments")
 public class Payment {
@@ -19,9 +21,21 @@ public class Payment {
     private PayMethod method;
 
     @Column(nullable = false,updatable = false)
-    private LocalDateTime paidAt;
+    private LocalDateTime paidAt = LocalDateTime.now();
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id",unique = true,nullable = false)
+    private Order order;
 
+    protected Payment(){
+
+    }
+
+    public Payment(Order order, int amount, PayMethod method){
+        this.order = order;
+        this.amount = amount;
+        this.method = method;
+    }
 
     public enum PayMethod {
         CARD, TRANSFER, POINT

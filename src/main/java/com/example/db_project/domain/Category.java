@@ -1,7 +1,11 @@
 package com.example.db_project.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
 @Entity
 @Table(name = "categories")
 public class Category {

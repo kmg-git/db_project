@@ -2,7 +2,9 @@ package com.example.db_project.domain;
 
 import com.example.db_project.exception.OutOfStockException;
 import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "books")
 public class Book {
@@ -21,6 +23,10 @@ public class Book {
 
     @Column(nullable = false, columnDefinition = "INT CHECK (price >= 0)")
     private int stock;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     protected Book(){
 
@@ -45,5 +51,9 @@ public class Book {
     public void addStock(int quantity){
         stock += quantity;
 
+    }
+
+    void assignCategory(Category category){
+        this.category=category;
     }
 }
