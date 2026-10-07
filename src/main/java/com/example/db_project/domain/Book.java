@@ -53,7 +53,7 @@ public class Book {
 
     }
 
-    void assignCategory(Category category){
+    public void assignCategory(Category category){
         this.category=category;
     }
 }
