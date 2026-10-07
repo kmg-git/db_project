@@ -59,6 +59,22 @@ public class OrderService {
 
         return responses;
     }
+    @Transactional
+    public void cancel(Long orderId){
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException(orderId));
+        if(order.getStatus()==Order.OrderStatus.CANCELED){
+            throw new IllegalStateException();
+        }
+
+        List<OrderItem> items = order.getOrderItems();
+
+        for(OrderItem item : items){
+            Book book = item.getBook();
+            book.addStock(item.getQuantity());
+        }
+        order.setStatus(Order.OrderStatus.CANCELED);
+
+    }
 
 
 

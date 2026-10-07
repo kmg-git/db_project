@@ -69,4 +69,8 @@ public class Order {
     public enum OrderStatus{
         ORDERED, CANCELED
     }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
 }
